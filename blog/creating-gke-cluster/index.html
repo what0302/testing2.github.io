@@ -127,81 +127,195 @@ if (!doNotTrack) {
           </header>
           <article class="post__content">
               
-<p>GKE(Google Kubernetes Engine)는 Google Cloud Platform이 제공하는 managed Kubernetes 서비스입니다. 이 글에서는 GKE에서 새 클러스터를 생성하는 방법을 단계 별로 알아보겠습니다. 그 전에 먼저, GKE가 다른 Kubernetes-as-a-Service인 AWS의 EKS, Azure의 AKS에 비해서 갖는 특징부터 살펴볼게요.</p>
-<h2 id="gke-vs-eks-vs-aks">GKE vs. EKS vs. AKS<a class="anchor" href="#gke-vs-eks-vs-aks">#</a></h2>
-<p>이 절의 목적은 세 서비스의 모든 면을 상세히 비교하는 것이 아닙니다. 다른 서비스에 비해 GKE가 갖는 특징적인 부분 위주로 살펴보겠습니다. 제 주관적인 의견이 포함되어 있을 수 있습니다.</p>
-<h3 id="made-by-google">Made by Google<a class="anchor" href="#made-by-google">#</a></h3>
-<p>Kubernetes는 Google이 만든 오픈 소스 프로젝트입니다. GCP 역시 Google이 제공하는 클라우드 컴퓨팅 서비스이죠. 그렇기 때문에 다른 클라우드 서비스와 비교해서 GCP의 GKE는 조금 특별한 점을 갖습니다.</p>
-<p>이 특징이 가장 잘 드러나는 점이 GKE의 릴리즈 날짜입니다. GKE는 2015년 8월에 처음 GA(General Availability)로 릴리즈되었습니다. EKS와 AKS가 모두 2018년에 릴리즈된 것과 비교하면 매우 이른 시기입니다. 참고로 Kubernetes가 1.0 버전을 릴리즈한 것이 2015년 7월입니다. 즉, GKE는 Kubernetes 1.0 릴리즈 이후 한 달만에 출시된 것입니다. Kubernetes와 GCP 모두 Google의 프로젝트이기 때문에 가능했던 일일 것입니다.</p>
-<h3 id="gcp-is-gke-first">GCP is GKE-first<a class="anchor" href="#gcp-is-gke-first">#</a></h3>
-<p>GKE는 GCP에 있는 유일한 container orchestration 서비스로서 중요한 의미를 갖습니다. 다른 GCP 서비스들도 orchestration이 필요하다면 GKE와의 연동을 디폴트로 지원하죠. 이에 비해 AWS는 자체적으로 container orchestration 서비스인 ECS를 갖고 있습니다. 그래서 그런지 여러 면에서 AWS가 Kubernetes에 기반한 EKS보다 자사가 만든 ECS를 밀어주려고 한다는 인상을 지우기가 힘듭니다. AWS의 다른 서비스에서 ECS를 먼저 지원하거나 더 안정적으로 지원해주곤 하기 때문입니다. (이 글을 쓰는 현재 AWS Fargate Spot 서비스는 ECS만 지원하며 EKS는 지원하지 않습니다. 언제 EKS를 지원할지도 아직 불명확합니다.)</p>
-<h3 id="automatic-upgrade">Automatic upgrade<a class="anchor" href="#automatic-upgrade">#</a></h3>
-<p>GKE는 다른 서비스들과 다르게 클러스터 Kubernetes 버전의 automatic upgrade를 지원합니다. 즉, automatic upgrade를 선택했다면 새로운 버전이 릴리즈될 때 GKE가 스스로 master와 node pool의 버전을 올리고 맞춰주는 것입니다. Automatic upgrade는 GKE를 생성할 때 Release Channel을 선택해서 활성화할 수 있습니다.</p>
-<h3 id="1-free-cluster">1 free cluster<a class="anchor" href="#1-free-cluster">#</a></h3>
-<p>GKE에서 1개의 zonal cluster (zone 하나에 있는 클러스터)까지는 무료입니다. (Azure의 AKS도 마찬가지로 무료인 것으로 알고 있습니다.) 이에 비해 AWS의 EKS는 시간당 0.1달러로 한달에 72달러의 비용을 내야합니다.</p>
-<h2 id="creating-gke-cluster">Creating GKE cluster<a class="anchor" href="#creating-gke-cluster">#</a></h2>
-<p>이 절에서는 GKE 클러스터를 생성하는 과정은 스크린샷과 함께 알아보겠습니다. 설명할 필요가 있는 부분은 설명 덧붙여 놓았습니다.</p>
-<p>GCP에서 project를 생성하고 GKE 기능을 enable하고 나서, Create cluster 버튼을 클릭하면 아래 화면으로 진입할 수 있습니다.</p>
-<h3 id="cluster-basics">Cluster basics<a class="anchor" href="#cluster-basics">#</a></h3>
-<p><img src="/images/creating-gke-cluster/cluster-basics.png" alt="cluster-basics"></p>
-<h4 id="location-type">Location type</h4>
-<p>Zonal location type은 zone 이라는 Google Cloud의 데이터 센터에 master node가 하나 존재하는 형태입니다. Cluster master의 고가용성(High Availability)를 보장하지 않습니다. 이에 비해 Regional location type은 고가용성을 보장하기 위해 region 안에 zone 별로 하나씩 여러 개의 master node를 생성합니다.</p>
-<h4 id="multi-zonal-cluster-vs-regional-cluster">Multi-zonal cluster vs. Regional cluster</h4>
-<p>Default node locations를 여러개 지정해서 multi-zonal cluster를 구성할 수도 있습니다. Multi-zonal cluster와 regional cluster는 무엇이 다를까요? Multi-zonal cluster는 master가 하나의 zone에만 존재하며 node는 여러 zone에 같은 개수로 존재합니다. Node들의 고가용성은 보장하지만 cluster master node의 고가용성을 보장하지 않는 것입니다. 이에 비해 regional cluster는 master node가 여러 zone에 위치합니다.</p>
-<h4 id="release-channel">Release channel</h4>
-<p>Release channel을 선택하면 Kubernetes 버전의 automatic upgrade를 지원받을 수 있습니다. Rapid channel은 오픈 소스 Kubernetes가 GA(General Availability)된 뒤 몇 주 안에 릴리즈됩니다. Regular channel은 Rapid가 업데이트된 후 2~3개월 후에 릴리즈되며, Stable channel은 Regular보다 다시 2~3월 후에 문제가 없다는 것이 확인된 후 릴리즈됩니다.</p>
-<h3 id="node-pool-details">Node pool details<a class="anchor" href="#node-pool-details">#</a></h3>
-<p><img src="/images/creating-gke-cluster/node-pools-details.png" alt="node-pools-details"></p>
-<h4 id="node-pool">Node pool</h4>
-<p>Node pool은 같은 종류의 노드의 집합입니다. EKS의 node group에 해당합니다.</p>
-<h4 id="surge-upgrade">Surge upgrade</h4>
-<p>Surce upgrade는 node의 Kubernetes version 업그레이드 시 node를 몇개까지 더 늘이고 줄일 수 있는지를 결정합니다. Max surge가 1이라는 말은 추가로 1개 node를 더 생성할 수 있다는 뜻입니다. Max unavailable이 0이라는 말은 사용 가능한 node 수가 업그레이드 전의 node 수보다 더 적게 되지는 않도록 하겠다는 뜻입니다. 즉, max surge가 1이고 max unavailable이 0이면 GKE는 새 버전의 node 1개를 추가한 뒤 하나의 node를 종료하고, 다시 새 버전의 node 1개를 추가하기를 반복하면서 node를 업그레이드 하게 됩니다.</p>
-<h3 id="node-pool-nodes">Node pool nodes<a class="anchor" href="#node-pool-nodes">#</a></h3>
-<p><img src="/images/creating-gke-cluster/node-pools-node.png" alt="node-pools-node"></p>
-<p><img src="/images/creating-gke-cluster/node-pools-node-networking.png" alt="node-pools-node-networking"></p>
-<h4 id="machine-type">Machine type</h4>
-<p>현재 가장 저렴하면서도 Kubernetes cluster를 감당할 수 있는 machine type은 general-purpose N1 Series g1-small (1 vCPU, 1.7GB memory)입니다.</p>
-<h4 id="boot-disk-size">Boot disk size</h4>
-<p>저렴하면서도 실용적으로 쓸 수 있는 boot disk 크기는 32기가 정도입니다.</p>
-<h4 id="enable-preemptible-nodes">Enable preemptible nodes</h4>
-<p>Preemptible nodes란 최대 24시간까지만 지속되는 인스턴스입니다. 이 옵션을 체크하면 cluster에서 preemptible nodes를 사용할 수 있습니다.</p>
-<p>Security와 metadata 등의 옵션은 필요한 경우 설정하세요. 대부분의 경우 디폴트로 남겨두어도 좋습니다.</p>
-<h3 id="automation">Automation<a class="anchor" href="#automation">#</a></h3>
-<p><img src="/images/creating-gke-cluster/automation.png" alt="automation"></p>
-<h4 id="maintenance-window">Maintenance window</h4>
-<p>Maintenance window를 설정하지 않았을 때 GKE는 Kubernetes version upgrade를 어느 때나 진행할 수 있습니다. Maintenance window는 auto upgrade를 진행할 시간을 지정할 수 있는 기능입니다. 트래픽이 가장 적은 새벽 시간 등으로 설정해 두시면 좋습니다.</p>
-<h4 id="node-auto-provisioning">Node auto-provisioning</h4>
-<p>Node auto-provisioning은 자동으로 새로운 node pool을 생성하고 삭제하는 기능입니다. 이 기능을 활성화하지 않으면 GKE는 미리 정해진 node pool 중에서만 새 node를 생성합니다. 하지만 node auto-provisioning 기능을 사용하면 새로운 node pool을 GKE가 직접 생성할 수 있습니다.</p>
-<h3 id="networking">Networking<a class="anchor" href="#networking">#</a></h3>
-<p><img src="/images/creating-gke-cluster/networking.png" alt="networking"></p>
-<h4 id="private-cluster">Private cluster</h4>
-<p>Private cluster 내 node들은 public ip address를 갖지 않고 public internet과 연결되지 않습니다. 따라서 inbound, outbound 연결을 할 수 없습니다. Private cluster 내 특정 node에 outbound internet access를 주고 싶다면 NAT 등을 통해야 합니다.</p>
-<h4 id="vpc-native-traffic-routing">VPC-native traffic routing</h4>
-<p>VPC-native traffic routing을 활성화하면 Kubernetes의 네트워크 구조를 GCP의 VPC와 자동으로 연동합니다. 따라서 NAT 없이도 GKE를 다른 GCP 서비스와 바로 연결할 수 있게 됩니다. 다른 GCP 서비스들과 internal IP로 편리하게 통신할 수 있도록 하기 위해서 이 기능을 활성화하는 것이 좋습니다.</p>
-<h3 id="features">Features<a class="anchor" href="#features">#</a></h3>
-<p><img src="/images/creating-gke-cluster/features.png" alt="features"></p>
-<h4 id="cloud-operations">Cloud Operations</h4>
-<p>Cloud Operations는 Google Cloud 어플리케이션을 로깅 및 모니터링하는 서비스입니다. 과거 Stackdriver라고 불리다가 Cloud Operations로 이름이 바뀌었습니다. 활성화해두시면 대시보드 등으로 클러스터를 쉽게 모니터링할 수 있습니다.</p>
-<h2 id="connecting-to-gke-cluster">Connecting to GKE cluster<a class="anchor" href="#connecting-to-gke-cluster">#</a></h2>
-<p>클러스터를 만들었으면 써보아야겠죠. 생성된 클러스터를 로컬 kubectl과 연결하는 방법은 다음과 같습니다.</p>
-<pre><code class="language-bash">gcloud init  # Account, project, default region을 설정합니다.
-gcloud container clusters get-credentials {cluster-name} --zone {zone-name} --project {project-name}
-
-</code></pre>
-<p>위 커멘드를 실행하면 kubeconfig에 새 context 정보가 기록되며 kubectl로 GKE cluster에 접근할 수 있게 됩니다.</p>
-<h2 id="run-a-pod">Run a pod<a class="anchor" href="#run-a-pod">#</a></h2>
-<p>연결된 클러스터 샘플 어플리케이션을 실행해 보고 싶다면 다음 커멘드로 가능합니다.</p>
-<pre><code>kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080
-</code></pre>
-<h2 id="references">References<a class="anchor" href="#references">#</a></h2>
+<h1 id="-hunting-webshells-">웹쉘 헌팅 <em>(Hunting Webshells)</em></h1>
+<h5 id="-hunting-webshells-linux-and-windows-commands-webshelllink-">링크: <a href="https://library.mosse-institute.com/articles/2022/06/hunting-webshells-linux-and-windows-commands/hunting-webshells-linux-and-windows-commands.html" title="Go webshell">Hunting Webshells: Linux and Windows Commands</a></h5>
+<h5 id="-">작성자: 강하늘 사원</h5>
+<h5 id="-2024-4-7-">작성일자: 2024년 4월 7일</h5>
+<h2 id="-webshell-">웹쉘(Webshell)의 정의</h2>
 <ul>
-<li><a href="https://stackoverflow.com/questions/57215726/google-cloud-gke-multi-zone-cluster-vs-regional-clusters">https://stackoverflow.com/questions/57215726/google-cloud-gke-multi-zone-cluster-vs-regional-clusters</a></li>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips">https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips</a></li>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept">https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept</a></li>
-<li><a href="https://medium.com/@jwlee98/gcp-gke-%EC%B0%A8%EA%B7%BC-%EC%B0%A8%EA%B7%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-1%ED%83%84-gke-%EA%B0%9C%EC%9A%94-382dc69b2ec4">https://medium.com/@jwlee98/gcp-gke-차근-차근-알아보기-1탄-gke-개요</a></li>
-<li><a href="https://medium.com/@jwlee98/gcp-gke-%EC%B0%A8%EA%B7%BC-%EC%B0%A8%EA%B7%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-2%ED%83%84-gke-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%B0%8F-%ED%99%95%EC%9E%A5-%ED%95%B4%EB%B3%B4%EA%B8%B0-5c9b137e72c8">https://medium.com/@jwlee98/gcp-gke-차근-차근-알아보기-2탄-gke-서비스-및-확장-해보기</a></li>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#using-gcloud-init">https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#using-gcloud-init</a></li>
+<li>공격자가 서버에 원격으로 접근하기 위해 사용하는 악성 스크립트임.<ul>
+<li>예를 들면 웹쉘을 이용해 임의의 명령을 실행하고, 파일을 업로드 및 다운로드 하거나 리버스 쉘(Reverse Shell) 연결을 설정하는 데에도 사용할 수 있음.</li>
 </ul>
+</li>
+</ul>
+<h2 id="-">소개</h2>
+<ul>
+<li>로그 분석은 웹쉘(Apache, IIS 등)을 탐색하는 데 사용되는 기술 중 하나임.</li>
+<li>웹쉘 로그 분석에 많은 시간을 투자하지 않고, Log Parser Studio 도구를 사용하여 이전 섹션에서 언급한 도구와 기본 내장 OS 명령 및/또는 스크립팅 언어를 포함한 IIS 웹 로그를 분석하여 웹 서버의 디렉토리에서 숨겨진 웹쉘을 찾을 것임.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>실제 도구로 넘어가기 전에 웹쉘을 찾기 위한 몇가지 기본적인 Linux 웹 서버 명령을 살펴보겠음.</li>
+<li><em>알아둬야 할 것은 이 방법이 웹쉘을 찾기 위한 유일한 방법은 아님.</em></li>
+<li><em>웹쉘을 찾는 방법들 중 몇가지만 다룰 것임.</em></li>
+</ul>
+<p></br></p>
+<ul>
+<li>다음 절에서는 특정 리눅스 웹 서버에서 4개의 웹 셸을 찾는 방법과 도구를 살펴봄.<ul>
+<li>두 개의 파일은 난독화되지 않고 다른 두 개의 파일은 난독화됨.</li>
+<li>또한, 두 개의 파일에는 .php 파일 확장자가 있고 두 개의 웹쉘에는 .txt 파일 확장자가 있음.</li>
+</ul>
+</li>
+<li>이는 완료 및 성공적인 탐지를 위해 수행됨.</li>
+</ul>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/947a1829-1c63-490a-a051-397cf133e05c" alt="image"></p>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/8d2bcf47-41c6-4519-ac31-053a5dfca952" alt="image"></p>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/270f4d93-97f0-4ae9-9f75-774818276718" alt="image"></p>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/3dfd07bd-418f-4a9a-937b-56911603abe1" alt="image"></p>
+<ul>
+<li>이전 사진에서 다음 웹쉘이 서버에 있는 것을 볼 수 있음.<ul>
+<li>locus7s.php (/var/www/html/)</li>
+<li>unknown.txt (/var/www/html/js/)</li>
+<li>ss8.txt (/var/www/html/images/)</li>
+<li>unknown2.php (/var/www/html/css/)</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">리눅스 명령</h2>
+<ul>
+<li>다음 명령은 지난 24시간 이내에 웹 서버에 업로드된 새 파일을 찾을 것임.</li>
+<li><p>사용자 환경의 웹 서버에서 매일 웹쉘 검사를 수행하는 경우 유용함.</p>
+<p><code>find . -type f -name &#39;*.php&#39; -mtime -1</code></p>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/2feeb249-4d50-49f7-8818-5aa60030e658" alt="image"></p>
+<ul>
+<li>앞의 명령을 사용하여 Linux는 24시간 이내의 모든 PHP 파일(&#39;*.php&#39;)을 현재 디렉터리(.) 내에서 검색하도록 지시함.</li>
+<li>-mtime 파일 속성은 파일이 마지막으로 수정한 시간과 날짜를 저장함(속성 자체가 아닌 내용만 저장).</li>
+</ul>
+<p></br></p>
+<ul>
+<li><p>이 정보는 다음 명령을 사용하여 볼 수 있음:</p>
+<p><code>ls -l</code></p>
+</li>
+</ul>
+<ul>
+<li><p>txt 파일이나 해당 문제에 대한 모든 파일에 대해 동일한 작업을 수행할 수 있음:</p>
+<p><code>find . -type f -name &#39;*.txt&#39; -mtime -1</code></p>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/faf28069-3d26-4a8c-8501-1bfacc5f3edd" alt="image"></p>
+<ul>
+<li>앞의 명령은 파일 내에서 아무것도 검사하지 않음.</li>
+<li>검색된 위치에서 파일 내용의 마지막 수정 시간만 확인함.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>파일 내에서 의심스러운 코드를 찾아내는 몇 가지 리눅스 명령어를 살펴보겠음.</li>
+</ul>
+<ul>
+<li>파일 내에서 의심스러운 코드를 찾기 위해 xargs 및 grep을 사용하여 기존 Linux 명령을 수정함.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>간략한 설명: </br>
+  xargs - 표준 입력을 기반으로 명령줄을 생성하고 실행함. </br>
+  grep - 패턴과 일치하는 행을 표시함.</li>
+</ul>
+<ul>
+<li>이 명령은 PHP eval() 함수의 인스턴스를 검색함.</li>
+<li><p>다음 명령을 실행하여 PHP 웹쉘을 검색할 것임.</p>
+<p><code>find . -type f -name &#39;*.php&#39; | xargs grep -l &quot;eval *(&quot;</code></p>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/cf212861-640d-4f98-9d72-715e3c62b505" alt="image"></p>
+<ul>
+<li><p>php 파일이 아닌 txt 파일을 검색하면 이전과 동일한 결과를 얻을 수 있음:</p>
+<p><code>find . -type f -name &#39;*.txt&#39; | xargs grep -l &quot;eval *(&quot;</code></p>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/c41f4479-005d-4468-a145-2578c7df0b38" alt="image"></p>
+<ul>
+<li>이 Linux 명령을 한 가지 더 변경한 다음 다른 PHP 함수를 찾아보겠음.</li>
+<li>이번에는 base64_decode() 함수를 찾아보겠음.</li>
+</ul>
+<ul>
+<li><p>웹 서버에 있을 수 있는 PHP 파일 내에서 이 함수를 검색하는 동안 결과를 살펴보겠음:</p>
+<p><code>find . -type f -name &#39;*.php&#39; | xargs grep -l &quot;base64_decode*(&quot;</code></p>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/a4b9d85a-ba51-4e2e-a5f9-03bcedca047c" alt="image"></p>
+<ul>
+<li><p>이전 명령의 출력에 따르면 이번에 탐지된 파일은 단 한 개뿐이며 암호화되지 않은 파일임을 알 수 있음.</p>
+</li>
+<li><p>PHP 기반 웹 셸과 트로이 목마는 PHP 프로그래밍 언어의 eval() 및 base64_decode() 함수를 사용하는 경우가 많음.</p>
+</li>
+<li><p>이 예제에서는 str_rot13() 및 gzinflate와 같은 다른 PHP 함수가 활용됨.</p>
+</li>
+<li><p>악성 PHP 스크립트에 자주 있는 기능을 포함하여 모든 PHP 기능을 검색하는 한 줄의 코드를 실행할 수 있음.</p>
+<p><code>find . -type f -name &#39;*.php&#39; | xargs egrep -i &quot;(mail|fsockopen|pfsockopen|exec|system|passthru|eval|base64_decode) *\(&quot;</code></p>
+</li>
+<li><p>앞서 본 Linux 명령은 <em>egrep</em>을 활용하여 서버에 저장된 파일 내에서 다양한 키워드를 검색함.</p>
+</li>
+<li><p>히트를 기록하는 모든 항목은 발생 즉시 터미널에 표시됨.</p>
+</li>
+<li><p>각 기능에 대한 간략한 설명: </br></p>
+<ul>
+<li><strong>mail()</strong> - 스팸을 보내는 데 사용할 수 있음. </li>
+<li><strong>fsockopen()</strong> - 원격 요청을 보내기 위해 네트워크 연결을 여는 데 사용할 수 있음. </li>
+<li><strong>pfsockopen()</strong> - <strong>fsockopen()</strong> 과 동일함. </li>
+<li><strong>exec()</strong> - 명령 실행을 위한 것임. </li>
+<li><strong>system()</strong> - <strong>exec()</strong> 와 함께 사용할 수 있음. </li>
+<li><strong>passthru()</strong> - <strong>exec()</strong> 와 함께 사용할 수 있음.</li>
+</ul>
+</li>
+</ul>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/7ba61a60-2ebe-4fc8-9c8a-fb888f98d932" alt="image"></p>
+<ul>
+<li>PHP 파일만 찾고 있기 때문에 파일 이름에 PHP 확장자가 포함된 두 웹쉘을 모두 찾을 수 있었음.</li>
+<li><p>TXT로 저장된 웹셸에 대해 동일한 검색을 실행하면 결과가 동일할까?</p>
+<p>  <code>find . -type f -name &#39;*.txt&#39; | xargs egrep -i
+&quot;(mail|fsockopen|pfsockopen|exec|system|passthru|eval|
+base64_decode) *\(&quot;</code></p>
+<p>  <img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/5ae54d9c-1e84-4580-8db1-a39c0889f9f8" alt="image"></p>
+</li>
+<li><p>Linux 명령은 대부분 예상대로 수행됨.</p>
+</li>
+<li>이제 완전히 숨겨져 있고 난독화된 PHP 백도어를 보여줄 것임.</li>
+<li>코드 내에는 쉽게 눈에 띄는 PHP 함수가 없음.</li>
+</ul>
+<p>이 파일에 대한 일부 정보: </br>
+다음 디렉토리는 이 파일이 저장된 위치임: /var/www/html/v1/fonts/</p>
+<h3 id="-php-unknown-php-backdoor-">알 수 없는 PHP 백도어(Unknown PHP Backdoor)</h3>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/f0600599-1f37-450a-bea6-2daa1f8b1402" alt="image"></p>
+<ul>
+<li><p>단일 라이너인 최종 Linux 명령을 실행할 때 얻은 출력은 다음과 같음.</p>
+<p>  <code>sudo find . -type f -name &#39;*.txt&#39; | xargs egrep -i
+&quot;(mail|fsockopen|pfsockopen|exec|system|passthru|eval|
+base64_decode) *\(&quot;</code></p>
+</li>
+</ul>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/63059044-0137-4204-b7fa-96c47eb08b2f" alt="image"></p>
+<ul>
+<li>예상했던 대로 명령은 아무것도 찾지 못함.</li>
+</ul>
+<h2 id="windows-">Windows 명령</h2>
+<ul>
+<li>PowerShell의 <em>Get-ChildItem</em> 및 <em>Select-String cmdlet</em>을 사용하면 Windows의 grep 명령과 유사한 작업을 수행할 수 있으므로 파일 시스템에 저장된 파일 내에서 키워드를 검색할 수 있음.</li>
+<li><p>이 예에서는 PowerShell의 grep 명령을 한 줄로 구현하는 방법을 살펴보기만 하면 됨:</p>
+<p><code>get-childitem -recurse -include &quot;*.php&quot; | select-string  &quot;(mail|fsockopen|pfsockopen|exec\b|system\b|passthru|eval\b|base64_decode)&quot; | % {&quot;$($_.filename):$($_.line)&quot;} | out-gridview</code></p>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/9929727d-f1f4-417f-8f77-24ffd8e76631" alt="image"></p>
+</li>
+<li><p>PowerShell에서 이 명령을 간단히 설명하면 다음과 같음:</p>
+<ul>
+<li><strong>Get-ChildItem</strong>은 CMD의 dir 명령과 Linux의 ls 명령에 해당하는 명령.</li>
+<li><strong>-Recurse</strong>는 루트 디렉터리 아래에 있는 모든 디렉터리를 순회함.</li>
+<li><strong>-Include</strong> 스위치를 사용하여 파일 확장자를 지정하면 PowerShell이 해당 특정 파일 형식만 검사하도록 지시함.</li>
+<li><strong>|</strong> (파이프), 그 사용법은 Linux 및 CMD와 유사함.</li>
+<li><strong>Select-String</strong> 명령은 Linux의 <strong>grep</strong> 명령과 동일함.</li>
+<li><strong>\b</strong> 문자는 단어 경계를 나타내며, 이는 PowerShell에게 해당 단어에서 정확히 처리를 중지하도록 지시함.</li>
+<li>퍼센트 기호 <strong>&quot;%{$($_.filename:$($ .line)&quot;}</strong> 의 출력은 파일 이름과 단어가 발견된 줄을 제공함.</li>
+<li><strong>Out-Gridview</strong> 명령을 사용하면 출력이 콘솔 형식이 아닌 그리드 보기로 표시됨.</li>
+</ul>
+</li>
+<li><p>이전 PowerShell 명령의 결과가 아래에 표시되어 있음.</p>
+<p><img src="https://github.com/ICTIS-Cert-System-Project/ICTIS-Cert-System/assets/164521627/1edb6cba-a544-4242-bc16-01aec4c2ff1a" alt="image"></p>
+</li>
+<li><p>앞의 프로그램은 실제 웹 로그를 가리키도록 변경될 수 있으며 로그 내의 키워드를 검색하여 악의적인 증거를 식별할 수 있음.</p>
+</li>
+<li>Linux의 grep 명령은 정확히 같은 방식으로 작동함.</li>
+</ul>
+
 
 
               
