@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Dreamgonfly&#39;s blog</title>
-    <link>https://dreamgonfly.github.io/tags/</link>
-    <description>Recent content in Tags on Dreamgonfly&#39;s blog</description>
+    <title>Tags on what0302&#39;s blog</title>
+    <link>https://what0302.github.io/tags/</link>
+    <description>Recent content in Tags on what0302&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
-    <lastBuildDate>Thu, 23 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dreamgonfly.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://what0302.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Fourier Transform</title>
-      <link>https://dreamgonfly.github.io/tags/fourier-transform/</link>
+      <link>https://what0302.github.io/tags/fourier-transform/</link>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/fourier-transform/</guid>
+      <guid>https://what0302.github.io/tags/fourier-transform/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ubuntu</title>
-      <link>https://dreamgonfly.github.io/tags/ubuntu/</link>
+      <link>https://what0302.github.io/tags/ubuntu/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/ubuntu/</guid>
+      <guid>https://what0302.github.io/tags/ubuntu/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gcp</title>
-      <link>https://dreamgonfly.github.io/tags/gcp/</link>
+      <link>https://what0302.github.io/tags/gcp/</link>
       <pubDate>Mon, 05 Oct 2020 16:23:00 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/gcp/</guid>
+      <guid>https://what0302.github.io/tags/gcp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kubernetes</title>
-      <link>https://dreamgonfly.github.io/tags/kubernetes/</link>
+      <link>https://what0302.github.io/tags/kubernetes/</link>
       <pubDate>Mon, 05 Oct 2020 16:23:00 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/kubernetes/</guid>
+      <guid>https://what0302.github.io/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gpu</title>
-      <link>https://dreamgonfly.github.io/tags/gpu/</link>
+      <link>https://what0302.github.io/tags/gpu/</link>
       <pubDate>Sun, 19 Jul 2020 08:52:20 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/gpu/</guid>
+      <guid>https://what0302.github.io/tags/gpu/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hardware</title>
-      <link>https://dreamgonfly.github.io/tags/hardware/</link>
+      <link>https://what0302.github.io/tags/hardware/</link>
       <pubDate>Sun, 19 Jul 2020 08:52:20 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/hardware/</guid>
+      <guid>https://what0302.github.io/tags/hardware/</guid>
       <description></description>
     </item>
     
     <item>
       <title>reinforcement learning</title>
-      <link>https://dreamgonfly.github.io/tags/reinforcement-learning/</link>
+      <link>https://what0302.github.io/tags/reinforcement-learning/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/reinforcement-learning/</guid>
+      <guid>https://what0302.github.io/tags/reinforcement-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>deep learning</title>
-      <link>https://dreamgonfly.github.io/tags/deep-learning/</link>
+      <link>https://what0302.github.io/tags/deep-learning/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/deep-learning/</guid>
+      <guid>https://what0302.github.io/tags/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pytorch</title>
-      <link>https://dreamgonfly.github.io/tags/pytorch/</link>
+      <link>https://what0302.github.io/tags/pytorch/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/pytorch/</guid>
+      <guid>https://what0302.github.io/tags/pytorch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>blog</title>
-      <link>https://dreamgonfly.github.io/tags/blog/</link>
+      <link>https://what0302.github.io/tags/blog/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/blog/</guid>
+      <guid>https://what0302.github.io/tags/blog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>aws</title>
-      <link>https://dreamgonfly.github.io/tags/aws/</link>
+      <link>https://what0302.github.io/tags/aws/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/aws/</guid>
+      <guid>https://what0302.github.io/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>machine learning</title>
-      <link>https://dreamgonfly.github.io/tags/machine-learning/</link>
+      <link>https://what0302.github.io/tags/machine-learning/</link>
       <pubDate>Sun, 05 Nov 2017 21:07:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/machine-learning/</guid>
+      <guid>https://what0302.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nlp</title>
-      <link>https://dreamgonfly.github.io/tags/nlp/</link>
+      <link>https://what0302.github.io/tags/nlp/</link>
       <pubDate>Wed, 16 Aug 2017 21:07:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/tags/nlp/</guid>
+      <guid>https://what0302.github.io/tags/nlp/</guid>
       <description></description>
     </item>
     
