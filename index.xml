@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dreamgonfly&#39;s blog</title>
-    <link>https://dreamgonfly.github.io/</link>
-    <description>Recent content on Dreamgonfly&#39;s blog</description>
+    <title>what0302&#39;s blog</title>
+    <link>https://what0302.github.io/</link>
+    <description>Recent content on what0302&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© {year}</copyright>
-    <lastBuildDate>Thu, 23 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dreamgonfly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://what0302.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>푸리에 변환 뽀개기 1</title>
-      <link>https://dreamgonfly.github.io/blog/fourier-transform-background/</link>
+      <link>https://what0302.github.io/blog/fourier-transform-background/</link>
       <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/fourier-transform-background/</guid>
+      <guid>https://what0302.github.io/blog/fourier-transform-background/</guid>
       <description>푸리에 변환은 공학과 과학의 거의 모든 분야에서 쓰이고 있습니다. 신호 처리, 이미지 처리, 회로 설계, 분광학, 결정학 등등 예시를 들자면 끝이 없죠. 제가 그랬듯이, 푸리에 변환을 쓰고는 있지만 이해하지 못한 채로 찝찝한 마음을 가지고 있기도 합니다. 하지만 모든 일이 그렇듯 푸리에 변환 역시 이해하고 나면 별 것 아닙니다. 최대한 간결하면서도 찝찝합이 남지 않도록 푸리에 변환을 이해해 보도록 하겠습니다.
 이 글은 시리즈입니다. 첫번째 글은 푸리에 변환을 이해하기 위한 배경 지식을 다루고 있습니다.</description>
     </item>
     
     <item>
       <title>Ubuntu 설치 시 디스크 파티션 나누기</title>
-      <link>https://dreamgonfly.github.io/blog/install-ubuntu-with-partition/</link>
+      <link>https://what0302.github.io/blog/install-ubuntu-with-partition/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/install-ubuntu-with-partition/</guid>
+      <guid>https://what0302.github.io/blog/install-ubuntu-with-partition/</guid>
       <description>Ubuntu 18.04를 재설치하며 루트 디렉터리 (/) 와 홈 디렉터리 (/home)의 파티션을 나누면서 겪었던 과정과 트러블 슈팅을 정리하여 공유합니다.
 파티션을 나누면 좋은 이유 홈 디렉터리가 별개의 스토리지나 파티션에 있다면 데이터를 잃지 않으면서 운영체제를 재설치하기가 간편해집니다. 재설치를 할 때 홈 디렉터리는 포맷하지 않고 운영체제가 담긴 파티션만 포맷 후 새 운영체제를 설치하는 것으로 끝나기 때문입니다.
  참고: 디스크 파티션이란 디스크의 스토리지의 영역을 나누는 것을 &amp;ldquo;디스크 파티셔닝&amp;quot;이라고 부릅니다. 각 파티션의 위치와 크기는 디스크의 &amp;ldquo;파티션 테이블&amp;quot;이라는 곳에 저장됩니다.</description>
@@ -31,20 +31,20 @@
     
     <item>
       <title>GKE에 웹 어플리케이션 배포하기</title>
-      <link>https://dreamgonfly.github.io/blog/deploying-web-app-to-gke-cluster/</link>
+      <link>https://what0302.github.io/blog/deploying-web-app-to-gke-cluster/</link>
       <pubDate>Mon, 05 Oct 2020 16:23:00 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/deploying-web-app-to-gke-cluster/</guid>
+      <guid>https://what0302.github.io/blog/deploying-web-app-to-gke-cluster/</guid>
       <description>배포(deployment)는 개발의 마지막 단계로 코드가 서비스로 바뀌는 순간이라고 할 수 있습니다. 지난 글에서는 GKE 클러스터를 생성하는 방법을 알아보았습니다. 이를 이어서 이번 글에서는 GKE를 이용하여 간단한 웹 어플리케이션의 개발부터 배포까지 전 과정을 코드로 살펴보겠습니다. 구체적으로 Python, Docker, Github packages, Kubernetes service와 ingress, https를 위한 managed certificate 설정 방법을 다룹니다.
 Web application 이 글에서 사용할 예시로 Python FastAPI를 이용한 웹 어플리케이션을 만들어 보겠습니다. FastAPI 는 flask와 비슷한 인터페이스를 가졌지만 더 빠르고, 타입 기반이고, 문서화가 잘 되어 있는 Python 웹 프레임워크입니다.</description>
     </item>
     
     <item>
       <title>GKE 클러스터 생성하기</title>
-      <link>https://dreamgonfly.github.io/blog/creating-gke-cluster/</link>
+      <link>https://what0302.github.io/blog/creating-gke-cluster/</link>
       <pubDate>Tue, 28 Jul 2020 16:13:00 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/creating-gke-cluster/</guid>
+      <guid>https://what0302.github.io/blog/creating-gke-cluster/</guid>
       <description>GKE(Google Kubernetes Engine)는 Google Cloud Platform이 제공하는 managed Kubernetes 서비스입니다. 이 글에서는 GKE에서 새 클러스터를 생성하는 방법을 단계 별로 알아보겠습니다. 그 전에 먼저, GKE가 다른 Kubernetes-as-a-Service인 AWS의 EKS, Azure의 AKS에 비해서 갖는 특징부터 살펴볼게요.
 GKE vs. EKS vs. AKS 이 절의 목적은 세 서비스의 모든 면을 상세히 비교하는 것이 아닙니다. 다른 서비스에 비해 GKE가 갖는 특징적인 부분 위주로 살펴보겠습니다. 제 주관적인 의견이 포함되어 있을 수 있습니다.
 Made by Google Kubernetes는 Google이 만든 오픈 소스 프로젝트입니다.</description>
@@ -52,20 +52,20 @@ Made by Google Kubernetes는 Google이 만든 오픈 소스 프로젝트입니�
     
     <item>
       <title>CUDA Cores vs. Tensor Cores</title>
-      <link>https://dreamgonfly.github.io/blog/cuda-cores-vs-tensor-cores/</link>
+      <link>https://what0302.github.io/blog/cuda-cores-vs-tensor-cores/</link>
       <pubDate>Sun, 19 Jul 2020 08:52:20 +0900</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/cuda-cores-vs-tensor-cores/</guid>
+      <guid>https://what0302.github.io/blog/cuda-cores-vs-tensor-cores/</guid>
       <description>이 글에서는 Nvidia의 CUDA Core와 Tensor Core의 차이점에 대해 알아보겠습니다. 마지막에는 Nvidia가 Turing 아키텍쳐와 함께 발표한 Turing Tensor Core에 대해서도 알아봅니다.
 CUDA Cores 먼저 CUDA Core란 무엇인지에 대해 짚고 넘어가 봅시다. 한 줄로 요약하면, Nvidia GPU에서 CUDA Core가 하는 일은 CPU에서 CPU core가 하는 일과 같습니다. 차이점은 CUDA Core는 더 많은 수가 동시에 병렬로 연산하도록 설계되었다는 점입니다. CUDA Core는 CPU core보다 더 단순한 구조, 더 적은 캐시, 더 작은 instruction set, 더 낮은 clock rate를 갖습니다.</description>
     </item>
     
     <item>
       <title>강화학습 알고리즘 분류</title>
-      <link>https://dreamgonfly.github.io/blog/rl-taxonomy/</link>
+      <link>https://what0302.github.io/blog/rl-taxonomy/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/rl-taxonomy/</guid>
+      <guid>https://what0302.github.io/blog/rl-taxonomy/</guid>
       <description>이 글에서는 강화학습의 여러 알고리즘들을 카테고리로 묶는 분류 체계에 대해서 알아보겠습니다. 분류 체계를 이해하면 새로운 알고리즘이 등장하더라도 기존 알고리즘과 어떤 관계에 있는지 쉽게 파악할 수 있습니다.
 이 글은 David Silver의 Introduction to reinforcement learning과 OpenAI의 Spinning Up을 참고했습니다.
 Major Components of an RL Agent 강화학습의 분류 체계를 알아보기 전에 먼저 분류의 기준이 되는 강화학습 agent(행위자)의 구성 요소에 대해 알아보아야 합니다. 강화학습의 agent는 크게 다음 세가지의 요소를 갖습니다.
@@ -74,20 +74,20 @@ Policy Agent의 행동 패턴입니다.</description>
     
     <item>
       <title>쉽게 씌어진 GAN</title>
-      <link>https://dreamgonfly.github.io/blog/gan-explained/</link>
+      <link>https://what0302.github.io/blog/gan-explained/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/gan-explained/</guid>
+      <guid>https://what0302.github.io/blog/gan-explained/</guid>
       <description>이 글은 마이크로소프트웨어 391호 인공지능의 체크포인트(THE CHECKPOINT OF AI)에 &amp;lsquo;쉽게 쓰이는 GAN&amp;rsquo;이라는 제목으로 기고된 글입니다. 블로그에는 이 글의 원제이자 윤동주 시인의 &amp;lsquo;쉽게 씌어진 시&amp;rsquo;를 따라 지어진 제목인 &amp;lsquo;쉽게 씌어진 GAN&amp;rsquo;으로 포스팅합니다.
  페이스북 인공지능 연구팀의 리더이자 딥러닝의 아버지라 불리는 얀 르쿤(Yann LeCun) 교수는 GAN(Generative Adversarial Network)을 가리켜 최근 10년간 머신러닝 분야에서 가장 혁신적인 아이디어라고 말했다. 요즘 가장 주목받는 기술인 딥러닝 중에서도 GAN은 가장 많은 관심을 받고 있는 기술이다. 그만큼 GAN은 새로운 연구가 활발히 이루어지고 혁신이 빠르게 일어나고 있는 기술이기도 하다.</description>
     </item>
     
     <item>
       <title>Conda 가상 환경으로 PyTorch 설치하기</title>
-      <link>https://dreamgonfly.github.io/blog/conda-pytorch/</link>
+      <link>https://what0302.github.io/blog/conda-pytorch/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/conda-pytorch/</guid>
+      <guid>https://what0302.github.io/blog/conda-pytorch/</guid>
       <description>PyTorch 설치가 어려울 때, conda 가상 환경 안에 PyTorch를 설치하면 깔끔하게 설치될 때가 많습니다. 이 글은 conda 가상 환경으로 PyTorch를 설치하고 Jupyter의 kernel로 등록하는 방법을 소개합니다. TensorFlow도 같은 방법으로 설치할 수 있습니다.
 Windows 새 가상 환경 만들기
 $ conda create -y -n pytorch ipykernel  pytorch 대신 자신이 원하는 이름을 쓸 수 있습니다.
@@ -98,10 +98,10 @@ $ activate pytorch  PyTorch 설치하기
     
     <item>
       <title>쉽고 빠르게 수준 급의 GitHub 블로그 만들기 - jekyll remote theme으로</title>
-      <link>https://dreamgonfly.github.io/blog/jekyll-remote-theme/</link>
+      <link>https://what0302.github.io/blog/jekyll-remote-theme/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/jekyll-remote-theme/</guid>
+      <guid>https://what0302.github.io/blog/jekyll-remote-theme/</guid>
       <description>.github.io라는 url로 익숙한 GitHub Pages는 개인 블로그, 특히 개발 블로그 용으로 인기가 높습니다. 이 글에서는 가장 간단하게 수준 급의 GitHub Pages로 static 페이지를 호스팅하는 방법을 소개해 보겠습니다.
 이미 많은 글들이 GitHub Pages를 사용하는 방법을 설명하고 있지만, 이 글에서 소개하는 방법은 다음과 같은 특징이 있습니다.
  쉽고 빠르다 : 프로그램 설치가 없습니다. 이 글에서 소개하는 방법으로는 로컬 컴퓨터에 Ruby, Jekyll 등의 프로그램을 설치하지 않고도 블로그를 만들 수 있습니다. 그렇기 때문에 누구나 쉽게 10분 만에 따라할 수 있습니다.</description>
@@ -109,20 +109,20 @@ $ activate pytorch  PyTorch 설치하기
     
     <item>
       <title>AWS Lambda로 PyTorch 모델 서빙하기</title>
-      <link>https://dreamgonfly.github.io/blog/pytorch-on-aws-lambda/</link>
+      <link>https://what0302.github.io/blog/pytorch-on-aws-lambda/</link>
       <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/pytorch-on-aws-lambda/</guid>
+      <guid>https://what0302.github.io/blog/pytorch-on-aws-lambda/</guid>
       <description>AWS Lambda로 PyTorch 모델 서빙하기 AWS Lambda는 서버 관리의 부담을 없애주는 서버 리스 컴퓨팅(Serverless computing) 서비스입니다. Lambda를 한마디로 설명하면 이벤트가 발생했을 때만 서버가 떠서 코드를 실행하는 이벤트 기반 클라우드 플랫폼입니다. Lambda는 코드가 실행된 시간에 대해서만 비용을 내는 효율성과, 이벤트가 갑자기 많이 발생해도 병렬처리가 가능한 확장성 덕분에 각광받고 있습니다.
 이 글에서는 Lambda 위에 PyTorch 모델을 업로드하여 API로 서비스하는 방법을 공유하겠습니다. 이 글은 step-by-step으로 구성되어 있습니다. 배포 준비를 위해 Docker를 설치하고 PyTorch 라이브러리와 모델을 압축파일로 만들고 Lambda 위에 올린 뒤 API를 배포하는 것까지 차근차근 따라가 보겠습니다.</description>
     </item>
     
     <item>
       <title>딥러닝용 서버 설치기</title>
-      <link>https://dreamgonfly.github.io/blog/hardware-for-deep-learning/</link>
+      <link>https://what0302.github.io/blog/hardware-for-deep-learning/</link>
       <pubDate>Sun, 17 Dec 2017 18:10:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/hardware-for-deep-learning/</guid>
+      <guid>https://what0302.github.io/blog/hardware-for-deep-learning/</guid>
       <description>어제 딥러닝용 1080 Ti GPU 서버의 개발 환경 세팅을 마쳤습니다. 이 글에서는 서버 구매부터 Ubuntu 설치, NVIDIA driver, CUDA 및 cuDNN 설치, 그리고 Tensorflow와 PyTorch 설치까지 제가 개발 환경을 세팅한 방법을 정리했습니다.
 하드웨어 구성 참고를 위해 제가 구성한 서버 하드웨어도 보여드리겠습니다.
 괄호 안의 가격은 실제 구매한 가격이 아니라 참고를 위해 적어놓은 현금 최저가입니다.
@@ -131,10 +131,10 @@ $ activate pytorch  PyTorch 설치하기
     
     <item>
       <title>머신러닝 모델의 블랙박스 속을 들여다보기 : LIME</title>
-      <link>https://dreamgonfly.github.io/blog/lime/</link>
+      <link>https://what0302.github.io/blog/lime/</link>
       <pubDate>Sun, 05 Nov 2017 21:07:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/lime/</guid>
+      <guid>https://what0302.github.io/blog/lime/</guid>
       <description>머신 러닝 모델에 대해서 예측의 이유를 설명하는 것은 어렵습니다. 모델이 복잡해질수록 예측의 정확도는 올라가지만, 결과의 해석은 어려워지죠. 그렇기 때문에 많은 머신 러닝 모델들이 블랙박스라고 불립니다.
 하지만 모델이 &amp;lsquo;왜&amp;rsquo; 그렇게 작동하는지 아는 것은 중요합니다. 의사가 &amp;ldquo;인공 지능이 이렇게 하래요&amp;quot;라고 말하면서 환자를 수술하지는 않겠죠. 은행에서 의심스러운 거래를 차단하는 경우에도 차단당한 이용자는 설명을 요구할 것입니다. 하물며 Netflix에서 볼 영화를 선택할 때도, 추천 영화에 시간을 투자하기 전에 어느 정도의 모델에 대한 신뢰감은 필요합니다.
 모델의 예측의 근거를 이해하는 것은 언제 모델을 신뢰할지 또는 신뢰하지 않을지 결정하는 데도 중요합니다.</description>
@@ -142,30 +142,30 @@ $ activate pytorch  PyTorch 설치하기
     
     <item>
       <title>Recurrent Neural Network (RNN) 이해하기</title>
-      <link>https://dreamgonfly.github.io/blog/understanding-rnn/</link>
+      <link>https://what0302.github.io/blog/understanding-rnn/</link>
       <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/understanding-rnn/</guid>
+      <guid>https://what0302.github.io/blog/understanding-rnn/</guid>
       <description>Recurrent Neural Network (RNN) 이해하기 음악, 동영상, 에세이, 시, 소스 코드, 주가 차트. 이것들의 공통점은 무엇일까요? 바로 시퀀스라는 점입니다. 음악은 음계들의 시퀀스, 동영상은 이미지의 시퀀스, 에세이는 단어들의 시퀀스로 볼 수 있습니다. 시퀀스의 길이는 가변적입니다. 소설에는 한 페이지짜리 단편소설도 있고 열권짜리 장편소설도 있죠. 기존의 뉴럴 네트워크 알고리즘은 이미지처럼 고정된 크기의 입력을 다루는 데는 탁월하지만, 가변적인 크기의 데이터를 모델링하기에는 적합하지 않습니다.
 RNN(Recurrent Neural Network, 순환신경망)은 시퀀스 데이터를 모델링 하기 위해 등장했습니다. RNN이 기존의 뉴럴 네트워크와 다른 점은 &amp;lsquo;기억&amp;rsquo;(다른 말로 hidden state)을 갖고 있다는 점입니다.</description>
     </item>
     
     <item>
       <title>쉽게 씌어진 word2vec</title>
-      <link>https://dreamgonfly.github.io/blog/word2vec-explained/</link>
+      <link>https://what0302.github.io/blog/word2vec-explained/</link>
       <pubDate>Wed, 16 Aug 2017 21:07:00 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/word2vec-explained/</guid>
+      <guid>https://what0302.github.io/blog/word2vec-explained/</guid>
       <description>텍스트 기반의 모델 만들기는 텍스트를 숫자로 바꾸려는 노력의 연속이다. 텍스트를 숫자로 바꾸어야만 알고리즘에 넣고 계산을 한 후 결과값을 낼 수 있기 때문이다.
 텍스트를 숫자로 바꾸는 일 중의 하나로 단어를 벡터로 바꾸는 일을 생각할 수 있다. 단어를 벡터로 바꾸는 가장 단순한 방법은 단어에 번호를 매기고, 그 번호에 해당하는 요소만 1이고 나머지는 0을 갖는 벡터로 바꾸는 것이다. 예를 들어 총 5개의 단어가 있는데 &amp;lsquo;강아지&amp;rsquo;라는 단어에 2번을 매겼다고 하자. 그러면 &amp;lsquo;강아지&amp;rsquo;는 2번째 요소만 1이고 나머지는 모두 0인 5차원의 벡터로 표현이 된다.</description>
     </item>
     
     <item>
       <title>머신 러닝 소개 (Introduction to Machine Learning)</title>
-      <link>https://dreamgonfly.github.io/blog/introduction-to-machine-learning/</link>
+      <link>https://what0302.github.io/blog/introduction-to-machine-learning/</link>
       <pubDate>Sun, 13 Aug 2017 17:32:30 +0000</pubDate>
       
-      <guid>https://dreamgonfly.github.io/blog/introduction-to-machine-learning/</guid>
+      <guid>https://what0302.github.io/blog/introduction-to-machine-learning/</guid>
       <description>이 글은 머신 러닝에 관심은 있지만 머신 러닝이 무엇인지는 아직 잘 모르는 사람들을 위한 글입니다. 이 글에서는 머신 러닝의 개념과 일반적인 머신 러닝 프로젝트의 진행 과정(workflow)에 대해 알아봅니다.
 Introduction 머신 러닝은 이제 일상에서 뗄레야 뗄 수 없는 존재가 되었다. 한가지 예로, 네이버의 검색 페이지에는 머신 러닝 기술이 들어가지 않은 곳을 찾아보기 힘들 정도다. 자동 완성, 음성 인식, 연관검색어, 이미지 검색, 문장 요약 등의 영역에서 수많은 머신 러닝 기술들이 쓰이고 있다.</description>
     </item>
